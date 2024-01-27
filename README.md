@@ -1,23 +1,24 @@
 # webapp
-================================================================
-Test user
-Login:      editor
-Password:   editor
-================================================================
+================================================================<br />
 
-Task:
-Create Pyramid web application using Python language.
-https://trypyramid.com/
-There are two types of users: editor and guests.
-Editor can login and create Articles. 
-Article has next fields: date of publication, title, text, tags. Editor adds text of article using Rich Text Editor control. 
-Tags - is the list of keywords separated by comma, these are added by Editor as well.
-Guests cannot login, but they can view articles, sort by date and filter them by tags. 
-Also Guests can add comments.
-Please create application and deploy to Amazon AWS server, so it is accessible. 
-Please use PostgreSQL as database.
+Test user <br />
+login:      editor<br />
+password:   editor<br />
+================================================================<br />
 
-Review result:
+Task:<br />
+Create Pyramid web application using Python language.<br />
+https://trypyramid.com/<br />
+There are two types of users: editor and guests.<br />
+Editor can login and create Articles.<br />
+Article has next fields: date of publication, title, text, tags. Editor adds text of article using Rich Text Editor control.<br /> 
+Tags - is the list of keywords separated by comma, these are added by Editor as well.<br />
+Guests cannot login, but they can view articles, sort by date and filter them by tags.<br />
+Also Guests can add comments.<br />
+Please create application and deploy to Amazon AWS server, so it is accessible.<br />
+Please use PostgreSQL as database.<br />
+
+Review result:<br />
 1. Task is done except one requirement: "guests can sort by date". I would improve many things in this task, but next you can find some of the recommendations.
 2. I would implement tags with links.
 3. Comments I would sort time descending.
