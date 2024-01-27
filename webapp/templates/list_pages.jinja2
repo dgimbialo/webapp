@@ -1,0 +1,42 @@
+{% extends 'layout.jinja2' %}
+
+{% block subtitle %}List of Pages{% endblock subtitle %}
+
+{% block content %}
+
+  <!-- Add a search form for tags -->
+  {% if global_tag_search %}
+    <button type="button" onclick="showAll()">Show All</button>
+  {% else %}
+    <form method="get" action="{{ request.route_url('list_pages') }}">
+      <label for="tag-search"></label>
+      <input type="text" id="tag-search" name="tag_search" placeholder="Enter tag">
+      <button type="submit">Search</button>
+    </form>
+  {% endif %}
+
+  <br>
+  <br>
+
+  {% if is_editor %}
+    <p><a href="{{ request.route_url('add_page', pagename='new') }}">Add Articles</a></p>
+  {% endif %}
+  <h2>List of Articles</h2>
+  <ul>
+    {% for page in pages %}
+      <li><a href="{{ request.route_url('view_page', pagename=page.name) }}">{{ page.name }}</a></li>
+    {% endfor %}
+  </ul>
+
+  {% if alert %}
+    <script>
+      alert("Not found");
+    </script>
+  {% endif %}
+
+  <script>
+function showAll() {
+    window.location.href = "{{ request.route_url('list_pages') }}?showAll=true";
+}
+  </script>
+{% endblock content %}

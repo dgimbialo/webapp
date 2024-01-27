@@ -1,0 +1,79 @@
+{% extends 'layout.jinja2' %}
+
+{% block subtitle %}{{page.name}} - {% endblock subtitle %}
+
+{% block content %}
+  <link rel="stylesheet" type="text/css" href="{{request.static_url('webapp:static/theme.css') }}">
+
+  <p><a href="{{ request.route_url('view_wiki', pagename='') }}"><-Back</a></p>
+
+  {% if is_editor %}
+    <p><a href="{{ edit_url }}"> Edit this article </a></p>
+  {% endif %}
+
+  <!-- Text Viewer -->
+  <p>Created by: {{page.creator.name}}</p>
+  <p>Publication Date: {{page.publication_date.strftime('%Y-%m-%d %H:%M')}}</p>
+  <p>Tags: {{page.tags}}</p>
+  <h2>{{page.name}}</h2>
+  <div class="text-viewer"> 
+      {{ page.data | safe }}
+  </div>
+
+  <div id="comment-form">
+    <button id="add-comment-button" onclick="initializeCommentEditor('{{ page }}')">Add Comment</button>
+  </div>
+
+<script>
+  function initializeCommentEditor(page) {
+  var commentInput = document.createElement('textarea');
+  commentInput.id = 'comment-input';
+  commentInput.placeholder = 'Type your comment...';
+  commentInput.cols = '60';
+  commentInput.style.textAlign = 'left';
+
+  var submitButton = document.createElement('button');
+  submitButton.innerHTML = 'Submit Comment';
+  submitButton.onclick = function() {
+    submitComment(page);
+  };
+
+  var commentForm = document.getElementById('comment-form');
+  commentForm.appendChild(commentInput);
+
+  // Wrap textarea and button in a div with flex display
+  var buttonContainer = document.createElement('div');
+  buttonContainer.style.display = 'flex';
+  buttonContainer.style.flexDirection = 'column';
+  
+  // Align items to the left
+  buttonContainer.style.alignItems = 'flex-start';
+
+  buttonContainer.appendChild(submitButton);
+  commentForm.appendChild(buttonContainer);
+
+  // Remove the "Add Comment" button
+  var addCommentButton = document.getElementById('add-comment-button');
+  addCommentButton.style.display = 'none';
+  }
+
+function submitComment(page) {
+    var commentInput = document.getElementById('comment-input');
+    var commentText = commentInput.value;
+    window.location.href = `{{ request.route_url('view_page', pagename=page.name) }}?comment=${encodeURIComponent(commentText)}`;
+}
+</script>
+
+<!-- Comments Section -->
+<h3>Comments:</h3>
+{% for comment in page.comments %}
+  <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: #5b5757;">
+    <p><strong>{{ comment.user_name }}</strong> {{ comment.publication_time.strftime('%Y-%m-%d %H:%M') }}</p>
+    <p></p>
+    <div contentEditable="false">
+      {{ comment.content }}
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock content %}
