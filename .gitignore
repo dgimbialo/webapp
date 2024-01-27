@@ -31,3 +31,4 @@ venv/
 .python-version
 .vscode
 .DS_Store
+Webapp/alembic/versions/
