@@ -1,9 +1,8 @@
 # webapp
 ================================================================
-
-#Test user
-#Login:      editor
-#Password:   editor
+Test user
+Login:      editor
+Password:   editor
 ================================================================
 
 Task:
